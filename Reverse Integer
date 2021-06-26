@@ -1,0 +1,32 @@
+class Solution {
+ public static int reverse(int x) {
+       
+        boolean negativeFlag = false;
+        if (x < 0)
+        {
+            negativeFlag = true;
+            x = -x ;
+        }
+      int prev_rev_num = 0, sum = 0;
+        while(x!=0){
+            int r=x%10;
+            sum=sum*10+r;
+            if ((sum - r)/10 != prev_rev_num)
+            {
+                
+                return 0;
+            }
+            prev_rev_num = sum;
+            x=x/10;
+        }
+
+        return (negativeFlag == true)? -sum : sum;
+    }
+    public static void main(String[] args){
+        
+        Scanner sc=new Scanner(System.in);
+        int x=sc.nextInt();
+        
+        System.out.println(reverse(x));
+    }
+}
