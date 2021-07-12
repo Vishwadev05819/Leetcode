@@ -1,0 +1,26 @@
+class Solution
+{
+    
+
+public boolean isValid(String s) {
+        if(s.length()==1) return false;
+        HashMap<Character,Character> hashtable=  new HashMap<>();
+        hashtable.put('(',')');
+        hashtable.put('[',']');
+        hashtable.put('{','}');
+        //bracket combination in a hashtable
+        Stack<Character> stack = new Stack<>();
+        
+        for(int i=0;i<s.length();i++){
+            
+            if(hashtable.containsKey(s.charAt(i))){
+            
+                stack.push(s.charAt(i));
+            
+            }else if(stack.isEmpty() || hashtable.get(stack.pop())!=s.charAt(i)){
+                return false;
+                
+            }
+            
+            
+        }
