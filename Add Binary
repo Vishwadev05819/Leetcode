@@ -1,0 +1,128 @@
+class Solution {
+public String addBinary(String a, String b) {
+
+    int alen=a.length()-1;
+    int blen=b.length()-1;
+    
+    int remainder=0;
+    
+    StringBuffer sb=new StringBuffer();
+    
+    //finding which string is bigger and adding till we reach the end of the smaller sting
+    
+    while( alen>=0 && blen>=0){
+    
+        int x=Integer.parseInt(a.charAt(alen)+"");
+        int y=Integer.parseInt(b.charAt(blen)+"");
+        
+        int res;
+    
+        alen--;
+        blen--;
+    
+        //no remainder case
+        if(remainder==0){
+            res=0;
+            
+            if(x== 0 && y == 0){
+                remainder=0;
+                res=0;
+            }else if(x== 0 && y==1){
+                res=1;
+                remainder=0;
+            }else if(y== 0 && x==1){
+                res=1;
+                remainder=0;
+            }else if(x== 1 && y==1){
+                res=0;
+                remainder++;
+            }
+
+        //remainder present case
+        }else{
+            
+            res=1;
+            
+            if(x== 0 && y == 0){
+                remainder=0;
+            }else if(x== 0 && y==1){
+                res=0;
+                remainder++;
+            }else if(y== 0 && x==1){
+                res=0;
+                remainder++;
+            }else if(x== 1 && y==1){
+                res=1;
+                remainder++;
+            }
+            
+
+        }
+    
+        sb.append(res);
+    }
+    
+    //if the two inputs are not of same length then go throught the rest of the longer string
+    
+    while(alen>=0){
+        int x=Integer.parseInt(a.charAt(alen)+"");
+        
+        alen--;
+        
+        int res=0;
+        
+        if(remainder==0){
+            
+            res=x;
+            
+        }else{
+            
+            if(x==0){
+                res=1;
+                remainder=0;
+            }else{
+                res=0;
+                remainder=1;
+            }
+            
+        }
+        
+        sb.append(res);
+        
+    }
+    
+    while(blen>=0){
+        
+        int x=Integer.parseInt(b.charAt(blen)+"");
+        
+        blen--;
+        
+        int res=0;
+        
+        if(remainder==0){
+            
+            res=x;
+            
+        }else{
+            
+            if(x==0){
+                res=1;
+                remainder=0;
+            }else{
+                res=0;
+                remainder=1;
+            }
+          
+        }
+        
+        sb.append(res);
+    }
+    
+    if(remainder!=0){
+        sb.append(1);
+    }
+    
+    return sb.reverse().toString();
+    
+}
+}
