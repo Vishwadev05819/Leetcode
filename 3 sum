@@ -1,0 +1,29 @@
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        
+        Set<Integer> iDupe = new HashSet<>();
+        Set<List<Integer>> result = new HashSet<>();
+        Set<Integer> seen = new HashSet<>();
+        for(int i=0;i<nums.length;i++)
+        {
+            if(iDupe.add(nums[i]))
+            {
+                
+                for(int j=i+1;j<nums.length;j++)
+                {
+                    int z = -nums[i] - nums[j];
+                    if(seen.contains(z)) // check if we had previously encountered z while z being nums[j] in previous iterations
+                    {
+                        List<Integer> triplet = Arrays.asList(nums[i],nums[j],z);
+                        Collections.sort(triplet);
+                        result.add(triplet);
+                    }
+                    seen.add(nums[j]);
+                }
+                
+            }
+            seen.clear(); // clear for every i since there will be new j-> end elements for every i (subsets)
+        }
+     return new ArrayList<>(result);
+    }
+}
