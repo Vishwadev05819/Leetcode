@@ -1,0 +1,79 @@
+class Solution {
+    public String intToRoman(int num) {
+        if (num < 1)
+            return "";
+        String res = "";
+        int mil = num / 1000;
+        int cen = (num / 100) % 10;
+        int dex = (num / 10) % 10;
+        int units = num % 10;
+        
+        int m = 0, c = 0, d = 0, u = 0;
+        
+        while (m < mil) {
+            res += "M";
+            m++;
+        }
+        
+        while (c < cen) {
+            if (cen == 9) {
+                res += "CM";
+                c = cen;
+            }
+            else if (cen >= 5) {
+                res += "D";
+                cen -= 5;
+                c = 0;
+            }
+            else if (cen == 4) {
+                res += "CD";
+                c = cen;
+            }
+            else {
+                res += "C";
+                c++;
+            }
+        }
+        
+        while (d < dex) {
+            if (dex == 9) {
+                res += "XC";
+                d = dex;
+            }
+            else if (dex >= 5) {
+                res += "L";
+                dex -= 5;
+                d = 0;
+            }
+            else if (dex == 4) {
+                res += "XL";
+                d = dex;
+            }
+            else {
+                res += "X";
+                d++;
+            }
+        }
+        
+        while (u < units) {
+            if (units == 9) {
+                res += "IX";
+                u = units;
+            }
+            else if (units >= 5) {
+                res += "V";
+                units -= 5;
+                u = 0;
+            }
+            else if (units == 4) {
+                res += "IV";
+                u = units;
+            }
+            else {
+                res += "I";
+                u++;
+            }
+        }
+        return res;
+    }
+}
