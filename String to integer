@@ -1,0 +1,28 @@
+class Solution {
+    public int myAtoi(String s) {
+        char[] array = s.toCharArray();
+double result = 0;
+int sign = 0;
+boolean foundNumber = false;
+for (char c: array) {
+if (c >= '0' && c <= '9') {
+foundNumber = true;
+result = result * 10 + (c - 48);
+} else if (result == 0 && !foundNumber && sign == 0 && c == '-') {
+sign = -1;
+} else if (result == 0 && !foundNumber && sign == 0 && c == '+') {
+sign = 1;
+} else if ((result > 0 && c == ' ') || c != ' ' || (c == ' ' && (foundNumber || sign != 0))) {
+sign = sign != 0 ? sign : 1;
+return result <= Integer.MAX_VALUE ? (int) result * sign
+: sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+}
+}
+sign = sign != 0 ? sign : 1;
+return result <= Integer.MAX_VALUE ? (int) result * sign
+: sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+
+
+        
+    }
+}
