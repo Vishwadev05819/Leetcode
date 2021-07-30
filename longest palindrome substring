@@ -1,0 +1,26 @@
+class Solution {
+    public String longestPalindrome(String s) {
+            int startPos = 0, endPos = 0, i = 0, l = 0 , r = 0;       
+     int len = s.length();
+        char[] c = s.toCharArray();
+        if(len == 0 || s == null) return s;
+        
+        while(i < len){
+            l = r = i;
+            //This loop for consecutive letters as 'cBBd'
+            while(r + 1 < len && c[i] == c[r+1]) r++;
+            i = r+1;
+            while(r + 1 < len && l -1 >= 0 && c[l-1] == c[r+1]){
+                r++;
+                l--;
+            }
+            //Keep track for max length
+            if(r+1-l > endPos+1-startPos){
+                startPos = l;
+                endPos = r;
+            }
+        }
+        return s.substring(startPos,endPos+1);
+        
+    }
+}
